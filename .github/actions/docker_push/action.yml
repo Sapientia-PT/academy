@@ -14,5 +14,6 @@ runs:
   using: composite
   steps:
     - run: |
+            echo $TAG
             docker push ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME:${{ inputs.tag_name }}
       shell: bash
