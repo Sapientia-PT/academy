@@ -1,0 +1,16 @@
+name: Push
+description: Push Docker image
+inputs:
+  docker_username:
+    description: "Docker username"
+    required: true
+  image_name:
+    description: "Image name generated"
+    required: true
+runs:
+  using: composite
+  steps:
+    - run: docker tag ${{ inputs.image_name }} ${{ inputs.docker_username }}/${{ inputs.image_name }}
+      shell: bash
+    - run: docker push ${{ inputs.docker_username }}/${{ inputs.image_name }}
+      shell: bash
