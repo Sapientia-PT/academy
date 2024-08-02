@@ -1,4 +1,4 @@
-name: Build
+name: Build application
 description: Build application with Maven
 runs:
   using: composite
