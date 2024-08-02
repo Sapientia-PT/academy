@@ -27,7 +27,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - uses: SapientiaPT/academy/.github/actions/maven_build@main
+    - uses: Sapientia-PT/academy/.github/actions/maven_build@main
     - name: Create new Docker image
       run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
     - name: List docker images
