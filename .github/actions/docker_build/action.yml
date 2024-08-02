@@ -12,7 +12,6 @@ inputs:
   tag_name:
     description: "Tag of the image to create"
     required: false
-    default: $(date +%s)
 runs:
   using: composite
   steps:
