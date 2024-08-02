@@ -11,6 +11,6 @@ runs:
   using: composite
   steps:
     - run: |
-            docker image tag ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME:$TAG
+            docker image tag $DOCKER_IMAGE_NAME ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME:$TAG
             docker push ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME
       shell: bash
