@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  title: Workstation API
+  description: API for workstation
+  version: 1.0.0
+servers:
+  - url: ''
+paths:
+  /workstation/bookings:
+    post:
+      summary: "POST workstation/bookings"
+      operationId: "createBooking"
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/Booking"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    get:
+      summary: "GET workstation/bookings"
+      operationId: "getBookings"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      summary: "DELETE workstation/bookings"
+      operationId: "removeBooking"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+  /workstation/racks:
+    post:
+      summary: "POST workstation/racks"
+      operationId: "createRack"
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/Rack"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    get:
+      summary: "GET workstation/racks"
+      operationId: "getRacks"
+      parameters:
+        - name: "serialNumber"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      summary: "DELETE workstation/racks"
+      operationId: "removeRack"
+      parameters:
+        - name: "serialNumber"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    patch:
+      summary: "PATCH workstation/racks"
+      operationId: "updateRack"
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/Rack"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+  /workstation/racks/racks:
+    get:
+      summary: "GET workstation/racks/racks"
+      operationId: "getRacksByStatus"
+      parameters:
+        - name: "status"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+  /workstation/teams:
+    post:
+      summary: "POST workstation/teams"
+      operationId: "createTeam"
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/Team"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    get:
+      summary: "GET workstation/teams"
+      operationId: "getTeams"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      summary: "DELETE workstation/teams"
+      operationId: "removeTeam"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+  /workstation/teammembers:
+    post:
+      summary: "POST workstation/teammembers"
+      operationId: "createTeamMember"
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/TeamMember"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    get:
+      summary: "GET workstation/teammembers"
+      operationId: "getTeamMembers"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+    delete:
+      summary: "DELETE workstation/teammembers"
+      operationId: "removeTeamMember"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Response"
+components:
+  schemas:
+    Rack:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          nullable: true
+        serialNumber:
+          type: "string"
+        status:
+          type: "string"
+        teamId:
+          type: "integer"
+          format: "int32"
+    Booking:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        rackId:
+          type: "integer"
+          format: "int32"
+        requesterId:
+          type: "integer"
+          format: "int32"
+        bookFrom:
+          type: "string"
+          format: "date-time"
+        bookTo:
+          type: "string"
+          format: "date-time"
+    Team:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        product:
+          type: "string"
+    TeamMember:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        teamId:
+          type: "integer"
+          format: "int32"
+    Response:
+      type: "object"
+      properties: { }

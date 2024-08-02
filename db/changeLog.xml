@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="CTW03761 (generated)" id="1720776594878-1">
+        <createTable tableName="t_rack">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_rack_pkey"/>
+            </column>
+            <column name="serial_number" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="team_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="default_location" type="VARCHAR(10)"/>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="status" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-2">
+        <createTable tableName="t_team">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_team_pkey"/>
+            </column>
+            <column name="name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="default_location" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-3">
+        <createTable tableName="t_team_member">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_team_member_pkey"/>
+            </column>
+            <column name="team_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="ctw_id" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-4">
+        <createTable tableName="t_rack_asset">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_rack_asset_pkey"/>
+            </column>
+            <column name="rack_id" type="UUID"/>
+            <column name="asset_tag" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-5">
+        <createTable tableName="t_booking">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="t_booking_pkey"/>
+            </column>
+            <column name="rack_id" type="UUID"/>
+            <column name="requester_id" type="UUID"/>
+            <column name="book_from" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_to" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE"/>
+            <column name="modified_at" type="TIMESTAMP WITH TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-6">
+        <addUniqueConstraint columnNames="serial_number" constraintName="t_rack_serial_number_key" tableName="t_rack"/>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-7">
+        <addForeignKeyConstraint baseColumnNames="rack_id" baseTableName="t_booking" constraintName="t_booking_rack_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_rack" validate="true"/>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-8">
+        <addForeignKeyConstraint baseColumnNames="requester_id" baseTableName="t_booking" constraintName="t_booking_requester_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_team_member" validate="true"/>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-9">
+        <addForeignKeyConstraint baseColumnNames="rack_id" baseTableName="t_rack_asset" constraintName="t_rack_asset_rack_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_rack" validate="true"/>
+    </changeSet>
+    <changeSet author="CTW03761 (generated)" id="1720776594878-10">
+        <addForeignKeyConstraint baseColumnNames="team_id" baseTableName="t_team_member" constraintName="t_team_member_team_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="t_team" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
