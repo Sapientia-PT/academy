@@ -44,5 +44,3 @@ jobs:
       uses: Sapientia-PT/academy/.github/actions/docker_push@main
       with:
         docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
-        image_name: ${{ env.DOCKER_IMAGE_NAME }}
-        tag_name: ${{ env.TAG }}

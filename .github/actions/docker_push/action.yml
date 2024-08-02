@@ -4,16 +4,8 @@ inputs:
   docker_username:
     description: "Docker username"
     required: true
-  image_name:
-    description: "Image name generated"
-    required: true
-  tag_name:
-    description: "Tag of the image to create"
-    required: true
 runs:
   using: composite
   steps:
-    - run: |
-            echo $TAG
-            docker push ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME:${{ inputs.tag_name }}
+    - run: docker push ${{ inputs.docker_username }}/$DOCKER_IMAGE_NAME:$TAG
       shell: bash
