@@ -10,7 +10,5 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: docker tag ${{ inputs.image_name }} ${{ inputs.docker_username }}/${{ inputs.image_name }}
-      shell: bash
     - run: docker push ${{ inputs.docker_username }}/${{ inputs.image_name }}
       shell: bash
